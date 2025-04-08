@@ -1,0 +1,15 @@
+.pagination {
+  &__btn {
+    font-size: 16px;
+    color: #000;
+    padding: 8px;
+
+    &:hover {
+      background-color: var(--background-color-red-hover);
+    }
+  }
+
+  &__btn--active {
+    background-color: var(--background-color-red);
+  }
+}

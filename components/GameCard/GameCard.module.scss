@@ -1,0 +1,33 @@
+.game-card {
+  position: relative;
+  max-width: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__rating {
+    position: absolute;
+    top: 0;
+    background-color: var(--background-color-red);
+    padding: 8px;
+  }
+
+  &__content {
+    padding: 10px 10px 20px;
+    background-color: #333232;
+  }
+
+  &:hover {
+    transform: scale(1.03);
+    -webkit-box-shadow: 0 0 29px -3px rgba(255, 13, 13, 0.3);
+    -moz-box-shadow: 0 0 29px -3px rgba(255, 13, 13, 0.3);
+    box-shadow: 0 0 29px -3px rgba(255, 13, 13, 0.3);
+  }
+}

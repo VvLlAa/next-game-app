@@ -1,43 +1,64 @@
 import { AppState, wrapper } from '@/store';
-import { dataList } from '@/store/gamesSlice';
-import { useSelector } from 'react-redux';
-
+import {
+  fetchGamesSuccess,
+  getDataPage,
+  fetchGamesStart,
+  fetchGamesFailure,
+} from '@/store/gamesSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import styles from './index.module.scss';
+import Spinner from 'react-bootstrap/Spinner';
 import axios from 'axios';
+import { GameCardList } from '@/components/GameCardList/GameCardList';
+import { Pagination } from '@/components/Pagination/Pagination';
 
 export default function Home() {
-  const { gameList } = useSelector(
-    (state: AppState) => state.games
-  );
+  const { loading } = useSelector((state: AppState) => state.games);
+  const dispatch = useDispatch();
+
+  const handlePageChange = (page: number) => {
+    dispatch(getDataPage(page));
+  };
 
   return (
-    <main style={{ padding: 40 }}>
-      <h1>Games List (SSR)</h1>
-      {gameList.map((game) =>
-        <div key={game.id}>
-          {game.id}
+    <main style={{ padding: 40 }} className={styles['main-page']}>
+      {loading ? (
+        <div className={styles['main-page__spinner']}>
+          <Spinner animation="border" variant="danger" />
         </div>
+      ) : (
+        ''
       )}
+      <GameCardList />
+      <Pagination
+        totalItems={100}
+        pageSize={10}
+        handlePageChange={handlePageChange}
+      />
     </main>
   );
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async () => {
+  (store) => async (context) => {
+    const page = context.query.page;
     try {
+      store.dispatch(fetchGamesStart());
+
       const response = await axios.get(`${process.env.KEY_GAME}/api/games`, {
         params: {
           key: process.env.API_KEY,
           page_size: 15,
-          page: 1,
+          page: page,
         },
       });
-      store.dispatch(dataList(response.data.results));
+      store.dispatch(fetchGamesSuccess(response.data.results));
 
       return {
         props: {},
       };
-    } catch (er) {
-      console.log(er);
+    } catch (error) {
+      store.dispatch(fetchGamesFailure(error));
       return {
         props: {},
       };
