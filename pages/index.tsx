@@ -22,12 +22,10 @@ export default function Home() {
 
   return (
     <main style={{ padding: 40 }} className={styles['main-page']}>
-      {loading ? (
+      {loading && (
         <div className={styles['main-page__spinner']}>
           <Spinner animation="border" variant="danger" />
         </div>
-      ) : (
-        ''
       )}
       <GameCardList />
       <Pagination
@@ -58,7 +56,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
         props: {},
       };
     } catch (error) {
-      store.dispatch(fetchGamesFailure(error));
+      if (error instanceof Error) {
+        store.dispatch(fetchGamesFailure(error.message));
+      } else {
+        store.dispatch(fetchGamesFailure('Что-то пошло не так'));
+      }
       return {
         props: {},
       };
