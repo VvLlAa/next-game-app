@@ -8,7 +8,9 @@ export interface GameType {
   short_screenshots: ShortScreenshotsType[];
   parent_platforms: PlatformsType;
   slug: string;
-  tags: { name: string }[];
+  tags: { name: string; id: number }[];
+  description: string | null;
+  website: string | null;
 }
 
 export interface ShortScreenshotsType {

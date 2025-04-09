@@ -13,13 +13,17 @@
     "@reduxjs/toolkit": "^2.6.1",
     "axios": "^1.8.4",
     "bootstrap": "^5.3.5",
+    "dompurify": "^3.2.5",
+    "html-react-parser": "^5.2.3",
     "next": "15.2.4",
     "next-redux-wrapper": "^8.1.0",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
-    "sass": "^1.86.3"
+    "react-swiper": "^0.1.5",
+    "sass": "^1.86.3",
+    "swiper": "^11.2.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",

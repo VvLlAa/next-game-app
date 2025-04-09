@@ -11,8 +11,8 @@
   --background-color-red-hover: #e83a3a;
 }
 
-body {
-  background-color: #1f1f1f !important;
+html body {
+  background-color: #1f1f1f;
 }
 
 h1,
@@ -35,4 +35,22 @@ h3 {
 
 p {
   font-size: 16px;
+}
+
+.carousel .carousel-indicators {
+  display: none;
+}
+
+.carousel .carousel-control-next {
+  z-index: 101;
+  height: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel .carousel-control-prev {
+  z-index: 101;
+  height: 60px;
+  top: 50%;
+  transform: translateY(-50%);
 }

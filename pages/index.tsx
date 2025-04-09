@@ -1,11 +1,10 @@
 import { AppState, wrapper } from '@/store';
 import {
   fetchGamesSuccess,
-  getDataPage,
   fetchGamesStart,
   fetchGamesFailure,
 } from '@/store/gamesSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styles from './index.module.scss';
 import Spinner from 'react-bootstrap/Spinner';
 import axios from 'axios';
@@ -14,12 +13,6 @@ import { Pagination } from '@/components/Pagination/Pagination';
 
 export default function Home() {
   const { loading } = useSelector((state: AppState) => state.games);
-  const dispatch = useDispatch();
-
-  const handlePageChange = (page: number) => {
-    dispatch(getDataPage(page));
-  };
-
   return (
     <main style={{ padding: 40 }} className={styles['main-page']}>
       {loading && (
@@ -28,11 +21,7 @@ export default function Home() {
         </div>
       )}
       <GameCardList />
-      <Pagination
-        totalItems={100}
-        pageSize={10}
-        handlePageChange={handlePageChange}
-      />
+      <Pagination totalItems={500} pageSize={14} />
     </main>
   );
 }
@@ -42,11 +31,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const page = context.query.page;
     try {
       store.dispatch(fetchGamesStart());
-
       const response = await axios.get(`${process.env.KEY_GAME}/api/games`, {
         params: {
           key: process.env.API_KEY,
-          page_size: 15,
+          page_size: 14,
           page: page,
         },
       });
@@ -67,3 +55,5 @@ export const getServerSideProps = wrapper.getServerSideProps(
     }
   }
 );
+
+

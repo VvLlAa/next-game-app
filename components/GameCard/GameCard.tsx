@@ -4,8 +4,13 @@ import Image from 'next/image';
 import { dateConversion } from '@/utins/dateConversion';
 
 export const GameCard = ({ game }: { game: GameType }) => {
+  const openCard = () => {
+    localStorage.setItem('gameCard', JSON.stringify(game));
+    window.location.href = `/game/${game.id}`
+  };
+
   return (
-    <div className={styles['game-card']}>
+    <div className={styles['game-card']} onClick={() => openCard()}>
       <Image
         src={game.background_image}
         alt="img_game"
@@ -21,3 +26,5 @@ export const GameCard = ({ game }: { game: GameType }) => {
     </div>
   );
 };
+
+

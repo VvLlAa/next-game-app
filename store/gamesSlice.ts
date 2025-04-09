@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GameType } from '@/type/type';
-import { router } from 'next/client';
 
 interface GamesState {
   gameList: GameType[];
+  currentGame: GameType | null;
   currentPage: number;
   loading: boolean;
   error: string | null;
@@ -11,6 +11,7 @@ interface GamesState {
 
 const initialState: GamesState = {
   gameList: [],
+  currentGame: null,
   currentPage: 1,
   loading: false,
   error: null,
@@ -22,7 +23,6 @@ export const gamesSlice = createSlice({
   reducers: {
     fetchGamesStart: (state) => {
       state.loading = true;
-      console.log(state.loading);
     },
     fetchGamesSuccess(state, action: PayloadAction<GameType[]>) {
       state.gameList = action.payload;
@@ -33,9 +33,12 @@ export const gamesSlice = createSlice({
       state.error = action.payload;
     },
 
-    getDataPage: (state, action: PayloadAction<number>) => {
-      router.push({ query: { page: action.payload } });
+    getDataPage: (state) => {
       state.loading = true;
+    },
+
+    openCardPage: (state, action: PayloadAction<GameType>) => {
+      state.currentGame = action.payload;
     },
   },
 });
@@ -45,5 +48,6 @@ export const {
   fetchGamesSuccess,
   fetchGamesFailure,
   getDataPage,
+  openCardPage,
 } = gamesSlice.actions;
 export default gamesSlice.reducer;
