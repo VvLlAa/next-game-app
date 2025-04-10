@@ -1,5 +1,4 @@
 import { CarouselComponent } from '@/components/Carousel/CarouselComponent';
-import { dateConversion } from '@/utins/dateConversion';
 import styles from './[id].module.scss';
 import { useEffect, useState } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
@@ -9,6 +8,7 @@ import axios from "axios";
 import {openCardPage} from "@/store/gamesSlice";
 import {useSelector} from "react-redux";
 import parse from 'html-react-parser';
+import {GameListContentCard} from "@/components/GameCard/GameListContentCard";
 
 const GamePage = () => {
   const { currentGame } = useSelector((state: AppState) => state.games);
@@ -56,50 +56,16 @@ const GamePage = () => {
         }}
         className={styles['game-page__background']}
       />
-      <div className={styles['game-page__body']}>
-          <CarouselComponent
-              gameScreenshots={game?.short_screenshots || []}
-          />
-          <div className={styles['game-page__content']}>
-              <h1>{game?.name}</h1>
-              <div className={styles['game-page__context']}>
-                  <span className={styles['game-page__title']}>Платформа:</span>{' '}
-                  {game?.parent_platforms.map((item, index) => (
-                      <div key={item.platform.id} className={styles['platform']}>
-                          {index !== 0 && <>, </>}
-                          {item.platform.name}
-                      </div>
-                  ))}
-              </div>
-              <div className={styles['game-page__context']}>
-                  <span>Дата выхода:</span>
-                  <div>{dateConversion(game?.released || '')}</div>
-              </div>
-              <div className={styles['game-page__context']}>
-                  <span>Рейтинг:</span>
-                  <div className={styles['game-page__rating']}>
-                      {game?.rating}
-                  </div>
-              </div>
-              <div className={styles['game-page__context']}>
-                  <span>Теги:</span>
-                  <div className={styles['game-page__tags']}>
-                      {game?.tags.map((item) => (
-                          <div key={item.id} className={styles['platform']}>
-                              {item.name}
-                          </div>
-                      ))}
-                  </div>
-              </div>
-              <div className={styles['game-page__context']}>
-                  <span>Сайт:</span>
-                  <a href={currentGame?.website} target="_blank" rel="noopener noreferrer">
-                      {currentGame?.website || '-------'}
-                  </a>
-              </div>
-          </div>
-      </div>
-        {GameDescription()}
+        <div className={styles['game-page__content']}>
+            <CarouselComponent
+                gameScreenshots={game?.short_screenshots || []}
+            />
+            <GameListContentCard
+                game={game}
+                currentGame={currentGame}
+            />
+        </div>
+      {GameDescription()}
     </div>
   );
 };

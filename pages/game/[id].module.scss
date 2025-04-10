@@ -22,44 +22,11 @@
     }
   }
 
-  &__body {
-    display: flex;
-    gap: 1rem;
-  }
-
   &__content {
     display: flex;
-    flex: 1;
-    flex-direction: column;
-    gap: 0.5rem;
-    span {
-      display: inline-block;
-
-      min-width: 120px;
-    }
-  }
-  &__context {
-    display: flex;
     flex-direction: row;
-    align-items: center;
-  }
-
-  &__rating {
-    background-color: var(--background-color-red);
-    padding: 4px;
-    border-radius: 4px;
-  }
-
-  &__tags {
-    display: flex;
-    gap: 4px;
-    flex-wrap: wrap;
-
-    div {
-      border: 1px solid #a8a8a8;
-      padding: 4px;
-      border-radius: 4px;
-    }
+    width: 100%;
+    gap: 2rem;
   }
 }
 
@@ -68,7 +35,7 @@
     width: 750px;
     margin: 0 auto;
 
-    &__body {
+    &__content {
       flex-direction: column;
     }
   }
