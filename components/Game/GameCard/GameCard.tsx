@@ -6,7 +6,7 @@ import { dateConversion } from '@/utins/dateConversion';
 export const GameCard = ({ game }: { game: GameType }) => {
   const openCard = () => {
     localStorage.setItem('gameCard', JSON.stringify(game));
-    window.location.href = `/game/${game.id}`
+    window.location.href = `/game/${game.id}`;
   };
 
   return (
@@ -17,6 +17,7 @@ export const GameCard = ({ game }: { game: GameType }) => {
         width={500}
         height={300}
         priority
+        style={{ maxHeight: '240px', maxWidth: '400px' }}
       />
       <div className={styles['game-card__rating']}>{game.rating}</div>
       <div className={styles['game-card__content']}>
@@ -26,5 +27,3 @@ export const GameCard = ({ game }: { game: GameType }) => {
     </div>
   );
 };
-
-

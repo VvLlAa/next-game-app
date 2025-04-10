@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import styles from './index.module.scss';
 import Spinner from 'react-bootstrap/Spinner';
 import axios from 'axios';
-import { GameCardList } from '@/components/GameCardList/GameCardList';
+import { GameList } from '@/components/Game/GameList/GameList';
 import { Pagination } from '@/components/Pagination/Pagination';
 
 export default function Home() {
@@ -20,7 +20,7 @@ export default function Home() {
           <Spinner animation="border" variant="danger" />
         </div>
       )}
-      <GameCardList />
+      <GameList />
       <Pagination totalItems={500} pageSize={14} />
     </main>
   );
@@ -55,5 +55,3 @@ export const getServerSideProps = wrapper.getServerSideProps(
     }
   }
 );
-
-

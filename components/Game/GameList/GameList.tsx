@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
-import styles from './GameCardList.module.scss';
+import styles from './GameList.module.scss';
 import { AppState } from '@/store';
-import { GameCard } from '@/components/GameCard/GameCard';
+import { GameCard } from '@/components/Game/GameCard/GameCard';
 
-export const GameCardList = () => {
+export const GameList = () => {
   const { gameList } = useSelector((state: AppState) => state.games);
 
   return (

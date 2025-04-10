@@ -1,10 +1,7 @@
 import styles from './Pagination.module.scss';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import {
-  fetchGamesStart,
-  fetchGamesSuccess,
-} from '@/store/gamesSlice';
+import { fetchGamesStart, fetchGamesSuccess } from '@/store/gamesSlice';
 import { useDispatch } from 'react-redux';
 
 interface PaginationState {
@@ -31,22 +28,22 @@ export const Pagination = ({
   }
 
   useEffect(() => {
-      const fetchData = async () => {
-          try {
-              const response = await fetch(
-                  `/api/games?page=${currentPage}&page_size=${pageSize}`
-              );
-              if (response.ok) {
-                  const data = await response.json();
-                  dispatch(fetchGamesSuccess(data));
-              } else {
-                  console.error('Ошибка при получении данных');
-              }
-          } catch (error) {
-              console.error('Ошибка при запросе к API:', error);
-          }
-      };
-      fetchData()
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `/api/games?page=${currentPage}&page_size=${pageSize}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          dispatch(fetchGamesSuccess(data));
+        } else {
+          console.error('Ошибка при получении данных');
+        }
+      } catch (error) {
+        console.error('Ошибка при запросе к API:', error);
+      }
+    };
+    fetchData();
   }, [currentPage, pageSize, dispatch]);
 
   const goToPage = (page: number) => {
