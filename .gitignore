@@ -17,6 +17,8 @@
 /.next/
 /out/
 
+.github/workflows/deploy.yml
+
 # production
 /build
 
