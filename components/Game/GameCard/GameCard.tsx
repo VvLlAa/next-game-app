@@ -7,6 +7,7 @@ export const GameCard = ({ game }: { game: GameType }) => {
   const openCard = () => {
     localStorage.setItem('gameCard', JSON.stringify(game));
     window.location.href = `/game/${game.id}`;
+
   };
 
   return (
