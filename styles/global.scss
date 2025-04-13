@@ -8,7 +8,8 @@
 
 :root {
   --background-color-red: #dc3838;
-  --background-color-red-hover: #e83a3a;
+  --background-color-red-hover: #f15656;
+  --background-color-red-active: #ef6565;
 }
 
 html body {
@@ -53,4 +54,31 @@ p {
   height: 60px;
   top: 50%;
   transform: translateY(-50%);
+}
+
+body .offcanvas {
+  background-color: #2a2121;
+}
+
+body .offcanvas-header .btn-close {
+  background-color: #fcfcfc;
+}
+
+body .MuiSlider-root {
+  width: 120px;
+}
+
+body .btn-primary {
+  background-color: var(--background-color-red);
+  border-color: var(--background-color-red);
+}
+
+body .btn-primary:hover {
+  background-color: var(--background-color-red-hover);
+  border-color: var(--background-color-red-hover);
+}
+
+body .btn-primary:active {
+  background-color: var(--background-color-red-active) !important;
+  border-color: var(--background-color-red-hover) !important;
 }

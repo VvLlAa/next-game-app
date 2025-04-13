@@ -11,6 +11,7 @@ export interface GameType {
   tags: { name: string; id: number }[];
   description: string | null;
   website: string | null;
+  metacritic: number;
 }
 
 export interface ShortScreenshotsType {

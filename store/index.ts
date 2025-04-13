@@ -24,8 +24,11 @@ const reducer = (
 const makeStore = () =>
   configureStore({
     reducer,
+    devTools: process.env.NODE_ENV !== 'production',
   });
 
 export type AppStore = ReturnType<typeof makeStore>;
 export type AppState = ReturnType<AppStore['getState']>;
-export const wrapper = createWrapper<AppStore>(makeStore, { debug: true });
+export const wrapper = createWrapper<AppStore>(makeStore, {
+  debug: process.env.NODE_ENV !== 'production',
+});

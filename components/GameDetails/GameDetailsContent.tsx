@@ -1,5 +1,8 @@
 import styles from '@/components/GameDetails/GameDetailsContent.module.scss';
-import { dateConversion } from '@/utins/dateConversion';
+import {
+  dateConversion,
+  normalizeRatingMetacritic,
+} from '@/utins/generalUtils';
 import { GameType } from '@/type/type';
 
 interface GameListContentCardProps {
@@ -33,7 +36,7 @@ export const GameDetailsContent = ({
         <div className={styles['game-list-content__context']}>
           <span>Рейтинг:</span>
           <div className={styles['game-list-content__rating']}>
-            {game?.rating}
+            {normalizeRatingMetacritic(game?.metacritic)}
           </div>
         </div>
         <div className={styles['game-list-content__context']}>

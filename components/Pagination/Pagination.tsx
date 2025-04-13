@@ -1,7 +1,7 @@
 import styles from './Pagination.module.scss';
-import { useEffect } from 'react';
+
 import { useRouter } from 'next/router';
-import { fetchGamesStart, fetchGamesSuccess } from '@/store/gamesSlice';
+import { fetchGamesStart } from '@/store/gamesSlice';
 import { useDispatch } from 'react-redux';
 
 interface PaginationState {
@@ -27,29 +27,12 @@ export const Pagination = ({
     pageNumbers.push(i);
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `/api/games?page=${currentPage}&page_size=${pageSize}`
-        );
-        if (response.ok) {
-          const data = await response.json();
-          dispatch(fetchGamesSuccess(data));
-        } else {
-          console.error('Ошибка при получении данных');
-        }
-      } catch (error) {
-        console.error('Ошибка при запросе к API:', error);
-      }
-    };
-    fetchData();
-  }, [currentPage, pageSize, dispatch]);
-
   const goToPage = (page: number) => {
     dispatch(fetchGamesStart());
     if (page >= 1 && page <= totalPages) {
-      router.push(`/?page=${page}`, undefined, { shallow: true });
+      const min = router.query.min || '1';
+      const max = router.query.max || '5';
+      router.push(`/?page=${page}&min=${min}&max=${max}`);
     }
   };
 
