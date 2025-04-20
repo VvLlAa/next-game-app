@@ -49,14 +49,18 @@ export const FilterBody = ({ setShow }: FilterProps) => {
 
   const updateGamesList = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push({
-      pathname: router.pathname,
-      query: {
-        ...router.query,
-        min: rating.min,
-        max: rating.max,
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          min: rating.min,
+          max: rating.max,
+        },
       },
-    });
+      undefined,
+      { shallow: false }
+    );
     dispatch(fetchGamesStart());
     setShow(false);
   };

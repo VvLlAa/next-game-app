@@ -30,5 +30,5 @@ const makeStore = () =>
 export type AppStore = ReturnType<typeof makeStore>;
 export type AppState = ReturnType<AppStore['getState']>;
 export const wrapper = createWrapper<AppStore>(makeStore, {
-  debug: process.env.NODE_ENV !== 'production',
+  debug: true,
 });

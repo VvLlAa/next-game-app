@@ -1,21 +1,19 @@
 import styles from './Pagination.module.scss';
-
 import { useRouter } from 'next/router';
-import { fetchGamesStart } from '@/store/gamesSlice';
-import { useDispatch } from 'react-redux';
 
 interface PaginationState {
   totalItems: number;
   pageSize: number;
+  setLoading: (show: boolean) => void;
 }
 
 export const Pagination = ({
   totalItems = 1000,
   pageSize = 5,
+  setLoading,
 }: PaginationState) => {
   const router = useRouter();
   const currentPage = Number(router.query.page ?? 1);
-  const dispatch = useDispatch();
   const totalPages = Math.ceil(totalItems / pageSize);
   const pageNumbers = [];
 
@@ -28,11 +26,18 @@ export const Pagination = ({
   }
 
   const goToPage = (page: number) => {
-    dispatch(fetchGamesStart());
+    setLoading(true);
     if (page >= 1 && page <= totalPages) {
       const min = router.query.min || '1';
       const max = router.query.max || '5';
-      router.push(`/?page=${page}&min=${min}&max=${max}`);
+      router.replace({
+        pathname: 'games',
+        query: {
+          page: page,
+          min: min,
+          max: max,
+        },
+      });
     }
   };
 

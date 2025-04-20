@@ -23,6 +23,7 @@ export const gamesSlice = createSlice({
   reducers: {
     fetchGamesStart: (state) => {
       state.loading = true;
+      console.log(state.loading);
     },
     fetchGamesSuccess(state, action: PayloadAction<GameType[]>) {
       state.gameList = action.payload;

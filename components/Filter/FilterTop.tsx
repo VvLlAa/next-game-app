@@ -7,7 +7,9 @@ import { FilterBody } from '@/components/Filter/FilterBody';
 export const FilterTop = () => {
   const [show, setShow] = useState<boolean>(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+  };
   const handleShow = () => {
     setShow(true);
   };
