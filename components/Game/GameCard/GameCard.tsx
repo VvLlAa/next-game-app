@@ -13,22 +13,24 @@ export const GameCard = ({ game }: { game: GameType }) => {
   };
 
   return (
-    <div className={styles['game-card']} onClick={() => openCard()}>
-      <Image
-        src={game.background_image}
-        alt="img_game"
-        width={500}
-        height={300}
-        priority
-        style={{ maxHeight: '240px', maxWidth: '400px' }}
-      />
-      <div className={styles['game-card__rating']}>
-        {normalizeRatingMetacritic(game.metacritic)}
+      <div className={styles['game-card']} onClick={openCard}>
+          <div className={styles['game-card__image-wrapper']}>
+              <Image
+                  src={game.background_image}
+                  alt={`Обложка игры ${game.name}`}
+                  fill
+                  className={styles['game-card__image']}
+              />
+              <div className={styles['game-card__rating']}>
+                  {normalizeRatingMetacritic(game.metacritic)}
+              </div>
+          </div>
+          <div className={styles['game-card__info']}>
+              <h2 className={styles['game-card__title']}>{game.name}</h2>
+              <p className={styles['game-card__release']}>
+                  Дата выхода: {dateConversion(game.released)}
+              </p>
+          </div>
       </div>
-      <div className={styles['game-card__content']}>
-        <h2>{game.name}</h2>
-        <div>Дата выхода: {dateConversion(game.released)}</div>
-      </div>
-    </div>
   );
 };

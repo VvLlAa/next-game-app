@@ -63,7 +63,7 @@ export const getServerSideProps = async (
       params: {
         key: process.env.API_KEY,
         metacritic: `${String(minRating)}, ${String(maxRating)}`,
-        page_size: 12,
+        page_size: 20,
         page: page,
       },
     });
