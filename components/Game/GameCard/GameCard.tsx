@@ -20,6 +20,8 @@ export const GameCard = ({ game }: { game: GameType }) => {
                   alt={`Обложка игры ${game.name}`}
                   fill
                   className={styles['game-card__image']}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
               />
               <div className={styles['game-card__rating']}>
                   {normalizeRatingMetacritic(game.metacritic)}
