@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { Slider } from '@mui/material';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
-import { fetchGamesStart } from '@/store/gamesSlice';
+import { fetchGamesStartSpinner } from '@/store/gamesSlice';
 
 interface FilterProps {
   setShow: (show: boolean) => void;
@@ -61,7 +61,7 @@ export const FilterBody = ({ setShow }: FilterProps) => {
       undefined,
       { shallow: false }
     );
-    dispatch(fetchGamesStart());
+    dispatch(fetchGamesStartSpinner());
     setShow(false);
   };
 
@@ -81,7 +81,9 @@ export const FilterBody = ({ setShow }: FilterProps) => {
         />
         {rating.min} - {rating.max}
       </div>
-      <Button type="submit">Применить</Button>
+      <Button type="submit" style={{ marginTop: '20px' }}>
+        Применить
+      </Button>
     </form>
   );
 };

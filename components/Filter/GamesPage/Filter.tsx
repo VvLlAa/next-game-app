@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import styles from './Filter.module.scss';
 
 import { FilterBody } from '@/components/Filter/GamesPage/FilterBody';
 
-export const FilterTop = () => {
+export const Filter = () => {
   const [show, setShow] = useState<boolean>(false);
 
   const handleClose = () => {
@@ -15,11 +16,16 @@ export const FilterTop = () => {
   };
 
   return (
-    <div className="filter-top">
+    <div className={styles['filter']}>
       <Button variant="primary" onClick={handleShow} className="me-2">
-        Поменять поиск
+        Фильтр
       </Button>
-      <Offcanvas show={show} onHide={handleClose} placement="top">
+      <Offcanvas
+        show={show}
+        onHide={handleClose}
+        placement="end"
+        className={styles['game-page__offcanvas']}
+      >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Фильтр</Offcanvas.Title>
         </Offcanvas.Header>

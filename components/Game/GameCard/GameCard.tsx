@@ -6,10 +6,14 @@ import {
   normalizeRatingMetacritic,
 } from '@/utils/generalUtils';
 import { router } from 'next/client';
+import { useDispatch } from 'react-redux';
+import { fetchGamesStartSpinner } from '@/store/gamesSlice';
 
 export const GameCard = ({ game }: { game: GameType }) => {
+  const dispatch = useDispatch();
   const openCard = () => {
     router.push(`/game/${game.id}`);
+    dispatch(fetchGamesStartSpinner());
   };
 
   return (
@@ -21,7 +25,7 @@ export const GameCard = ({ game }: { game: GameType }) => {
           fill
           className={styles['game-card__image']}
           sizes="(max-width: 768px) 100vw, 50vw"
-          priority
+          loading="lazy"
         />
         <div className={styles['game-card__rating']}>
           {normalizeRatingMetacritic(game.metacritic)}

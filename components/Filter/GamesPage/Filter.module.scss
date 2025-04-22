@@ -1,0 +1,8 @@
+.filter {
+  display: flex;
+  justify-content: end;
+
+  &__offcanvas {
+    z-index: 3;
+  }
+}

@@ -7,13 +7,11 @@
 }
 
 :root {
-  --background-color-red: #dc3838;
-  --background-color-red-hover: #f15656;
-  --background-color-red-active: #ef6565;
   --text-color-purple: #a855f7;
-  --button-color-purple: #9333ea;
-  --color-primary: #1f2937;
   --text-color-gray: #b0b0b0;
+  --button-color-purple: #9333ea;
+  --button-color-purple-hover: #a555f3;
+  --color-primary: #1f2937;
 }
 
 html body {
@@ -65,7 +63,7 @@ p {
 }
 
 body .offcanvas {
-  background-color: #2a2121;
+  background-color: var(--color-primary);
 }
 
 body .offcanvas-header .btn-close {
@@ -77,18 +75,18 @@ body .MuiSlider-root {
 }
 
 body .btn-primary {
-  background-color: var(--background-color-red);
-  border-color: var(--background-color-red);
+  background-color: var(--button-color-purple);
+  border-color: var(--button-color-purple);
 }
 
 body .btn-primary:hover {
-  background-color: var(--background-color-red-hover);
-  border-color: var(--background-color-red-hover);
+  background-color: var(--button-color-purple-hover);
+  border-color: var(--button-color-purple-hover);
 }
 
 body .btn-primary:active {
-  background-color: var(--background-color-red-active) !important;
-  border-color: var(--background-color-red-hover) !important;
+  background-color: var(--button-color-purple-hover) !important;
+  border-color: var(--button-color-purple-hover) !important;
 }
 
 body .MuiList-root {

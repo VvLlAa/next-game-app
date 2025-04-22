@@ -1,15 +1,22 @@
 .pagination {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+
   &__btn {
     font-size: 16px;
     color: #000;
     padding: 8px;
+    background-color: var(--text-color-gray);
+    border: none;
+    border-radius: 2px;
 
     &:hover {
-      background-color: var(--background-color-red-hover);
+      background-color: var(--button-color-purple-hover);
     }
   }
 
   &__btn--active {
-    background-color: var(--background-color-red);
+    background-color: var(--button-color-purple);
   }
 }

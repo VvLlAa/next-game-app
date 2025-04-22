@@ -1,10 +1,9 @@
 import styles from './games.module.scss';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { GameList } from '@/components/Game/GameList/GameList';
 import { Pagination } from '@/components/UI/Pagination';
-import Spinner from 'react-bootstrap/Spinner';
-import { FilterTop } from '@/components/Filter/GamesPage/FilterTop';
+import { Filter } from '@/components/Filter/GamesPage/Filter';
 import { GameType } from '@/type/type';
 import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
@@ -15,16 +14,12 @@ interface Games {
   games: GameType[];
 }
 
+const totalItems = 500;
+const pageSize = 14;
+
 export default function Games({ games }: Games) {
-  const [loading, setLoading] = useState<boolean>(true);
   const dispatch = useDispatch();
   const router = useRouter();
-
-  useEffect(() => {
-    if (games.length > 0) {
-      setLoading(false);
-    }
-  }, [games]);
 
   useEffect(() => {
     if (!router.query.page) {
@@ -36,8 +31,8 @@ export default function Games({ games }: Games) {
         undefined,
         { shallow: true }
       );
-      dispatch(fetchGamesSuccessSpinner());
     }
+    dispatch(fetchGamesSuccessSpinner());
   }, [router, dispatch]);
 
   return (
@@ -45,14 +40,9 @@ export default function Games({ games }: Games) {
       style={{ padding: 40 }}
       className={`${styles['main-page']} container`}
     >
-      {loading && (
-        <div className={styles['main-page__spinner']}>
-          <Spinner animation="border" variant="danger" />
-        </div>
-      )}
-      <FilterTop />
+      <Filter />
       <GameList games={games} />
-      <Pagination totalItems={500} pageSize={14} setLoading={setLoading} />
+      <Pagination totalItems={totalItems} pageSize={pageSize} />
     </main>
   );
 }
@@ -69,7 +59,7 @@ export const getServerSideProps = async (
     const response = await axios.get(`${process.env.KEY_GAME}/api/games`, {
       params: {
         key: process.env.API_KEY,
-        metacritic: `${String(minRating)}, ${String(maxRating)}`,
+        metacritic: `${String(minRating)},${String(maxRating)}`,
         page_size: 20,
         page: page,
       },
