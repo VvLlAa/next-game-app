@@ -1,8 +1,8 @@
-import styles from '@/components/GameDetails/GameDetailsContent.module.scss';
+import styles from '@/components/Game/GameDetails/GameDetailsContent.module.scss';
 import {
   dateConversion,
   normalizeRatingMetacritic,
-} from '@/utins/generalUtils';
+} from '@/utils/generalUtils';
 import { GameType } from '@/type/type';
 
 interface GameListContentCardProps {

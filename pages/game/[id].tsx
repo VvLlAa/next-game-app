@@ -1,41 +1,38 @@
 import { CarouselComponent } from '@/components/Carousel/CarouselComponent';
 import styles from './[id].module.scss';
-import { useEffect, useState } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import { GameType } from '@/type/type';
-import { AppState, wrapper } from '@/store';
 import axios from 'axios';
-import { openCardPage } from '@/store/gamesSlice';
-import { useSelector } from 'react-redux';
 import parse from 'html-react-parser';
-import { GameDetailsContent } from '@/components/GameDetails/GameDetailsContent';
+import { GameDetailsContent } from '@/components/Game/GameDetails/GameDetailsContent';
+import { GetStaticPropsContext } from 'next';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '@/store';
+import { useEffect } from 'react';
+import { fetchGamesSuccessSpinner } from '@/store/gamesSlice';
 
-const GamePage = () => {
-  const { currentGame } = useSelector((state: AppState) => state.games);
+interface GameDetails {
+  game: GameType;
+}
 
-  const [game, setCurrentGame] = useState<GameType | null>(null);
+const GamePage = ({ game }: GameDetails) => {
+  const { loading } = useSelector((state: AppState) => state.games);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const local = localStorage.getItem('gameCard');
-    const localScreenshot = local ? JSON.parse(local) : null;
-
-    if (localScreenshot) {
-      setCurrentGame(localScreenshot);
+    if (loading) {
+      dispatch(fetchGamesSuccessSpinner());
     }
-
-    return () => {
-      localStorage.removeItem('gameCard');
-    };
-  }, [currentGame, setCurrentGame]);
+  }, [loading, dispatch]);
 
   const GameDescription = () => {
-    const description = currentGame?.description;
+    const description = game?.description;
     return (
       <div>{description ? parse(description) : 'Описание недоступно'}</div>
     );
   };
 
-  if (!game)
+  if (!game || !game?.short_screenshots.length)
     return (
       <div>
         <div className={styles['main-page__spinner']}>
@@ -54,7 +51,7 @@ const GamePage = () => {
       />
       <div className={styles['game-page__content']}>
         <CarouselComponent gameScreenshots={game?.short_screenshots || []} />
-        <GameDetailsContent game={game} currentGame={currentGame} />
+        <GameDetailsContent game={game} currentGame={game} />
       </div>
       {GameDescription()}
     </div>
@@ -63,28 +60,55 @@ const GamePage = () => {
 
 export default GamePage;
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async (context) => {
-    const id = context.query.id;
-    try {
-      const response = await axios.get(
-        `${process.env.KEY_GAME}/api/games/${id}`,
-        {
-          params: {
-            key: process.env.API_KEY,
-          },
-        }
-      );
+export const getStaticProps = async (context: GetStaticPropsContext) => {
+  const { id } = context.params || {};
+  try {
+    const [gameResponse, screenshotsResponse] = await Promise.all([
+      axios.get(`${process.env.KEY_GAME}/api/games/${id}`, {
+        params: { key: process.env.API_KEY },
+      }),
+      axios.get(`${process.env.KEY_GAME}/api/games/${id}/screenshots`, {
+        params: { key: process.env.API_KEY },
+      }),
+    ]);
 
-      store.dispatch(openCardPage(response.data));
-      return {
-        props: {},
-      };
-    } catch (error) {
-      console.log(error);
-      return {
-        props: {},
-      };
-    }
+    const fullGame = {
+      ...gameResponse.data,
+      short_screenshots: screenshotsResponse.data.results,
+    };
+
+    return {
+      props: {
+        game: fullGame,
+      },
+      revalidate: 60,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      props: { game: null },
+    };
   }
-);
+};
+
+export const getStaticPaths = async () => {
+  try {
+    const response = await axios.get(`${process.env.KEY_GAME}/api/games`);
+    const games = response.data;
+
+    const paths = games.map((game: GameType) => ({
+      params: { id: game.id.toString() },
+    }));
+
+    return {
+      paths,
+      fallback: 'blocking',
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  }
+};

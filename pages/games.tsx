@@ -1,13 +1,15 @@
-import styles from './index.module.scss';
+import styles from './games.module.scss';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { GameList } from '@/components/Game/GameList/GameList';
-import { Pagination } from '@/components/Pagination/Pagination';
+import { Pagination } from '@/components/UI/Pagination';
 import Spinner from 'react-bootstrap/Spinner';
-import { FilterTop } from '@/components/Filter/FilterTop';
+import { FilterTop } from '@/components/Filter/GamesPage/FilterTop';
 import { GameType } from '@/type/type';
 import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { fetchGamesSuccessSpinner } from '@/store/gamesSlice';
 
 interface Games {
   games: GameType[];
@@ -15,6 +17,7 @@ interface Games {
 
 export default function Games({ games }: Games) {
   const [loading, setLoading] = useState<boolean>(true);
+  const dispatch = useDispatch();
   const router = useRouter();
 
   useEffect(() => {
@@ -33,11 +36,15 @@ export default function Games({ games }: Games) {
         undefined,
         { shallow: true }
       );
+      dispatch(fetchGamesSuccessSpinner());
     }
-  }, [router]);
+  }, [router, dispatch]);
 
   return (
-    <main style={{ padding: 40 }} className={styles['main-page']}>
+    <main
+      style={{ padding: 40 }}
+      className={`${styles['main-page']} container`}
+    >
       {loading && (
         <div className={styles['main-page__spinner']}>
           <Spinner animation="border" variant="danger" />

@@ -10,16 +10,24 @@
   --background-color-red: #dc3838;
   --background-color-red-hover: #f15656;
   --background-color-red-active: #ef6565;
+  --text-color-purple: #a855f7;
+  --button-color-purple: #9333ea;
+  --color-primary: #1f2937;
+  --text-color-gray: #b0b0b0;
 }
 
 html body {
-  background-color: #1f1f1f;
+  background-color: #0d131e;
 }
 
 h1,
 h2,
 h3 {
   margin: 0;
+}
+
+body a {
+  text-decoration: none;
 }
 
 h1 {
@@ -83,10 +91,11 @@ body .btn-primary:active {
   border-color: var(--background-color-red-hover) !important;
 }
 
-body .navbar {
+body .MuiList-root {
   background-color: #413939;
 }
 
-body .MuiList-root {
-  background-color: #413939;
+body .container {
+  max-width: 1200px;
+  padding: 0 24px;
 }

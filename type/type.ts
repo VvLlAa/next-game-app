@@ -1,5 +1,6 @@
 export interface GameType {
   id: number;
+  added: number;
   name: string;
   background_image: string;
   rating: number;

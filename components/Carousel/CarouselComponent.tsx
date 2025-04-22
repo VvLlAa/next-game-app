@@ -10,10 +10,12 @@ interface ScreenshotsProps {
 
 export const CarouselComponent = ({ gameScreenshots }: ScreenshotsProps) => {
   const [index, setIndex] = useState(0);
+  const [count, setCount] = useState(1);
+
   const [currentImg, setCurrentImg] = useState<ShortScreenshotsType | null>(
     gameScreenshots[0] || null
   );
-  const [count, setCount] = useState(1);
+
   const prevCountRef = useRef(1);
 
   const handleSelect = (selectedIndex: number) => {
@@ -40,6 +42,7 @@ export const CarouselComponent = ({ gameScreenshots }: ScreenshotsProps) => {
     setCount(idx + 1);
     setCurrentImg(gameScreenshots[idx] || null);
   };
+
   return (
     <div className={styles['carousel']}>
       <Carousel

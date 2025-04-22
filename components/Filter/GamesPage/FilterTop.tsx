@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
-import { FilterBody } from '@/components/Filter/FilterBody';
+import { FilterBody } from '@/components/Filter/GamesPage/FilterBody';
 
 export const FilterTop = () => {
   const [show, setShow] = useState<boolean>(false);

@@ -1,20 +1,42 @@
 import React, { FC } from 'react';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { AppProps } from 'next/app';
-import { wrapper } from '@/store';
+import { AppState, wrapper } from '@/store';
 import '@/styles/global.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '@/styles/global.scss';
-import { Navbar } from '@/components/Header/Navbar';
+import { Navbar } from '@/components/UI/Navbar';
+import Spinner from '@/components/UI/Spinner';
+import { NextRouter } from 'next/router';
 
 const MyApp: FC<AppProps> = ({ Component, ...rest }) => {
   const { store, props } = wrapper.useWrappedStore(rest);
 
   return (
     <Provider store={store}>
-      <Navbar />
-      <Component {...props.pageProps} />
+      <InnerApp
+        Component={Component}
+        pageProps={props.pageProps}
+        router={props.router}
+      />
     </Provider>
+  );
+};
+
+interface InnerAppProps {
+  Component: AppProps['Component'];
+  pageProps: AppProps['pageProps'];
+  router: NextRouter;
+}
+
+const InnerApp: FC<InnerAppProps> = ({ Component, pageProps, router }) => {
+  const loading = useSelector((state: AppState) => state.games.loading);
+
+  return (
+    <>
+      <Navbar />
+      {loading && <Spinner />}
+      <Component {...pageProps} router={router} />
+    </>
   );
 };
 

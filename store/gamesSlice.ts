@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { GameType } from '@/type/type';
 
 interface GamesState {
@@ -21,34 +21,15 @@ export const gamesSlice = createSlice({
   name: 'games',
   initialState,
   reducers: {
-    fetchGamesStart: (state) => {
-      state.loading = true;
-      console.log(state.loading);
-    },
-    fetchGamesSuccess(state, action: PayloadAction<GameType[]>) {
-      state.gameList = action.payload;
-      state.loading = false;
-    },
-    fetchGamesFailure(state, action: PayloadAction<string>) {
-      state.loading = false;
-      state.error = action.payload;
-    },
-
-    getDataPage: (state) => {
+    fetchGamesStartSpinner: (state) => {
       state.loading = true;
     },
-
-    openCardPage: (state, action: PayloadAction<GameType>) => {
-      state.currentGame = action.payload;
+    fetchGamesSuccessSpinner(state) {
+      state.loading = false;
     },
   },
 });
 
-export const {
-  fetchGamesStart,
-  fetchGamesSuccess,
-  fetchGamesFailure,
-  getDataPage,
-  openCardPage,
-} = gamesSlice.actions;
+export const { fetchGamesStartSpinner, fetchGamesSuccessSpinner } =
+  gamesSlice.actions;
 export default gamesSlice.reducer;

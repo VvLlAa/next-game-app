@@ -1,0 +1,59 @@
+body .navbar {
+  position: sticky;
+  background-color: #111827;
+  border: 1px solid #1f2937;
+
+  &__toolbar {
+    position: relative;
+    min-height: 64px;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &__logo-text {
+    font-weight: bold;
+  }
+
+  &__logo-text--purple {
+    color: var(--text-color-purple);
+  }
+
+  &__nav-items {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+
+    gap: 2rem;
+
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
+
+  &__button-group {
+    margin-left: auto;
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__menu-button {
+    display: flex;
+    margin-left: auto;
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__mobile-menu {
+    display: none;
+
+    @media (max-width: 767px) {
+      display: block;
+    }
+  }
+}
