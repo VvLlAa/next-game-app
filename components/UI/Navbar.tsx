@@ -47,69 +47,71 @@ export const Navbar = () => {
   return (
     <AppBar position="sticky" color="default" className={styles['navbar']}>
       <Container>
-        <Toolbar disableGutters className={styles['navbar__toolbar']}>
-          <Box
-            className={styles['navbar__logo']}
-            onClick={() => handleNavigate('/')}
-          >
-            <Typography
-              variant="h6"
-              className={`${styles['navbar__logo-text']} ${styles['navbar__logo-text--purple']}`}
+        <header>
+          <Toolbar disableGutters className={styles['navbar__toolbar']}>
+            <Box
+                className={styles['navbar__logo']}
+                onClick={() => handleNavigate('/')}
             >
-              Game
-            </Typography>
-            <Typography variant="h6" className={styles['navbar__logo-text']}>
-              Portal
-            </Typography>
-          </Box>
-
-          <Box className={styles['navbar__nav-items']}>
-            {NAV_ITEMS.map(({ label, path }) => (
-              <Button
-                key={label}
-                onClick={() => handleNavigate(path)}
-                sx={{
-                  color: '#D1D5DB',
-                  textTransform: 'none',
-                  fontWeight: 500,
-                  '&:hover': { color: '#fff' },
-                }}
+              <Typography
+                  variant="h6"
+                  className={`${styles['navbar__logo-text']} ${styles['navbar__logo-text--purple']}`}
               >
-                {label}
-              </Button>
-            ))}
-          </Box>
+                Game
+              </Typography>
+              <Typography variant="h6" className={styles['navbar__logo-text']}>
+                Portal
+              </Typography>
+            </Box>
 
-          <Box className={styles['navbar__button-group']}>
-            <Button
-              variant="outlined"
-              color="secondary"
-              sx={{ color: '#fff', borderColor: '#6B21A8' }}
-            >
-              Профиль
-            </Button>
-          </Box>
-
-          <Box className={styles['navbar__menu-button']}>
-            <IconButton size="large" onClick={handleOpenMenu} color="inherit">
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={handleCloseMenu}
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-              sx={{ display: { xs: 'block', md: 'none' } }}
-            >
-              {NAV_ITEMS.map(({ label, path }) => (
-                <MenuItem key={label} onClick={() => handleNavigate(path)}>
-                  <Typography textAlign="center">{label}</Typography>
-                </MenuItem>
+            <nav className={styles['navbar__nav-items']}>
+              {NAV_ITEMS.map(({label, path}) => (
+                  <Button
+                      key={label}
+                      onClick={() => handleNavigate(path)}
+                      sx={{
+                        color: '#D1D5DB',
+                        textTransform: 'none',
+                        fontWeight: 500,
+                        '&:hover': {color: '#fff'},
+                      }}
+                  >
+                    {label}
+                  </Button>
               ))}
-            </Menu>
-          </Box>
-        </Toolbar>
+            </nav>
+
+            <Box className={styles['navbar__button-group']}>
+              <Button
+                  variant="outlined"
+                  color="secondary"
+                  sx={{color: '#fff', borderColor: '#6B21A8'}}
+              >
+                Профиль
+              </Button>
+            </Box>
+
+            <Box className={styles['navbar__menu-button']}>
+              <IconButton size="large" onClick={handleOpenMenu} color="inherit">
+                <MenuIcon/>
+              </IconButton>
+              <Menu
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={handleCloseMenu}
+                  anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+                  transformOrigin={{vertical: 'top', horizontal: 'right'}}
+                  sx={{display: {xs: 'block', md: 'none'}}}
+              >
+                {NAV_ITEMS.map(({label, path}) => (
+                    <MenuItem key={label} onClick={() => handleNavigate(path)}>
+                      <Typography textAlign="center">{label}</Typography>
+                    </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          </Toolbar>
+        </header>
       </Container>
     </AppBar>
   );
