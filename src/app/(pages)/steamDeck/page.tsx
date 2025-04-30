@@ -10,6 +10,10 @@ export const revalidate = 60;
 export default async function steamDeck() {
     const res = await fetchSteamDeck()
 
+    if (!res || !res.games) {
+        return null;
+    }
+
     const gameData = res.games;
 
     if(!gameData) return null;
