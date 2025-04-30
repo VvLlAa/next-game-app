@@ -1,7 +1,7 @@
 export async function fetchGamesHome() {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/home`, {
-            next: { revalidate: 3600 },
+            next: { revalidate: 1200 },
         });
 
         if (!res.ok) return null;

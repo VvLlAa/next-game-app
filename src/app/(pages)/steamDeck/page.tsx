@@ -1,21 +1,19 @@
+
 import styles from './page.module.scss'
 import {Video} from "@/src/app/(pages)/steamDeck/components/video/Video";
 import {fetchSteamDeck} from "@/src/app/api/steamDeck/fetchSteamDeck";
 import {SteamDeckLarge} from "@/src/app/(pages)/steamDeck/components/SteamDeckLarge";
 
-export const revalidate = 60;
+export const revalidate = 1200;
 
-export default async function SteamDeckPage() {
-    let games = [];
 
-    try {
-        const res = await fetchSteamDeck();
-        if (res?.games) {
-            games = res.games;
-        }
-    } catch (error) {
-        console.error('Failed to fetch SteamDeck data:', error);
-    }
+export default async function steamDeck() {
+    const res = await fetchSteamDeck();
+
+    const gameData = res?.games ?? [];
+
+
+    if(!gameData) return null;
 
     return (
         <main className={styles['page']}>
@@ -30,14 +28,7 @@ export default async function SteamDeckPage() {
                 web={'https://clan.cloudflare.steamstatic.com/images//39049601/e9e38855027abe43282cc404e5b2a0c3401c5972.mp4?origin=https://store.steampowered.com/'}
                 mp4={'https://clan.cloudflare.steamstatic.com/images//39049601/5631a3ae1ed0c086f12cbef7e134264d80a9d3d8.webm?origin=https://store.steampowered.com/'}
             />
-
-            {games.length > 0 ? (
-                <SteamDeckLarge games={games} />
-            ) : (
-                <div className={`${styles['page__description']} container`}>
-                    <p>Игры временно недоступны</p>
-                </div>
-            )}
+            <SteamDeckLarge games={gameData}/>
 
             <div className={`${styles['page__description']} container`}>
                 <h1 className={styles['page__h1']}>STEAM DECK OLED</h1>

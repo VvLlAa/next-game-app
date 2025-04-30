@@ -4,11 +4,16 @@ export async function fetchSteamDeck() {
             next: { revalidate: 3600 },
         })
 
-        if(!res.ok) return null;
+        if(!res.ok) return { games: [] }
 
-        return await res.json();
+        const data = await res.json();
+
+        if (!data || !Array.isArray(data.games)) {
+            console.error('Invalid API response structure', data);
+            return { games: [] };
+        }
     } catch (error) {
         console.error(error);
-        return null;
+        return {games: []};
     }
 }
