@@ -1,7 +1,7 @@
 export async function fetchCardGame(id: string) {
     try {
         const res = await fetch(`${process.env.KEY_GAME}/api/appdetails?appids=${id}&key=${process.env.API_KEY}&l=russian`, {
-            next: { revalidate: 0 },
+            next: { revalidate: 3600 },
         });
 
         const data = await res.json();

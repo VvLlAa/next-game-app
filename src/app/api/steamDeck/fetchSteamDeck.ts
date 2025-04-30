@@ -1,7 +1,7 @@
 export async function fetchSteamDeck() {
     try {
         const res = await fetch(`http://localhost:3000/api/steamDeck`, {
-            next: { revalidate: 0 },
+            next: { revalidate: 3600 },
         })
 
         if(!res.ok) return null;
