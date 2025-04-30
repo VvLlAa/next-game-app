@@ -16,7 +16,6 @@ export const GameCard = ({ game }: { game: GameType }) => {
         (game: GameType) => {
             dispatch(fetchGamesStartSpinner());
             router.push(`/game/${game.id}`);
-            console.log(game.id)
         },
         [dispatch, router]
     );

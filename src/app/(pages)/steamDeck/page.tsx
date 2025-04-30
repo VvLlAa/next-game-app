@@ -12,8 +12,6 @@ export default async function steamDeck() {
 
     const gameData = res.games;
 
-    console.log(gameData)
-
     if(!gameData) return null;
 
     return (

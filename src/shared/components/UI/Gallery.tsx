@@ -42,7 +42,6 @@ export const Gallery = ({screenshots}: Props) => {
         } else if(scr === 'Left') {
             setSelectedImage((prev) =>  prev === 0 ? screenshots.length - 1 : prev - 1);
         }
-        console.log(selectedImage)
     };
 
     useEffect(() => {

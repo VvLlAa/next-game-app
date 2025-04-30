@@ -27,7 +27,6 @@ export const GameCardLarge = ({ initialGames }: GameCardFullWidthProps) => {
     (game: GameType) => {
       dispatch(fetchGamesStartSpinner());
       router.push(`/game/${game.id}`);
-      console.log(game.id)
     },
     [dispatch, router]
   );
