@@ -1,0 +1,27 @@
+.steam {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.h1 {
+  font-size: 3.25em;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+@media screen and (max-width: 750px){
+  .h1 {
+    font-size: 1.70em;
+  }
+}

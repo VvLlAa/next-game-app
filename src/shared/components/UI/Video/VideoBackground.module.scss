@@ -1,0 +1,45 @@
+.fullscreen-video {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  margin-bottom: 2rem;
+
+    &__video-pc {
+      width: auto;
+      height: auto;
+      max-width: 100vw;
+      max-height: 100vh;
+      display: block;
+      margin: 0 auto;
+    }
+    &__video-mobile{
+      display: none;
+      margin: 0 auto;
+    }
+
+  &__video-background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    z-index: -1;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .fullscreen-video {
+    &__video-pc {
+      display: none;
+    }
+    &__video-mobile {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+  }
+}

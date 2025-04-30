@@ -1,0 +1,17 @@
+.description {
+  flex: 1;
+
+  &__description {
+    font-size: 14px;
+    margin: 14px 0;
+  }
+  &__main-img {
+    width: 100%;
+    height: auto;
+  }
+
+  &__span-name {
+    color: var(--text-color-gray);
+    margin-right: 4px;
+  }
+}

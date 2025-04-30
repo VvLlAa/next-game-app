@@ -1,0 +1,46 @@
+.game-card {
+  background-color: #1f2937;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  width: 250px;
+  height: 100%;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  &__image-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__image {
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover &__image {
+    transform: scale(1.05);
+  }
+
+
+  &__info {
+    padding: 16px;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 8px;
+  }
+
+  &__release {
+    font-size: 14px;
+    color: #bbbbbb;
+  }
+}

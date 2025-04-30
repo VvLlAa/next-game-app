@@ -1,0 +1,19 @@
+.game-detail {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    gap: 16px;
+}
+
+.game-error {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+@media screen and (max-width: 900px) {
+    .game-detail {
+        flex-direction: column-reverse;
+        max-width: 600px;
+    }
+}
