@@ -10,11 +10,6 @@ export const revalidate = 60;
 export default async function steamDeck() {
     const res = await fetchSteamDeck().catch(() => null);
 
-    const gameData = res?.games ?? [];
-
-
-    if(!gameData) return null;
-
     if (!res || !res.games) {
         console.error('SteamDeck data is not available during build time');
         return (
@@ -37,7 +32,7 @@ export default async function steamDeck() {
                 web={'https://clan.cloudflare.steamstatic.com/images//39049601/e9e38855027abe43282cc404e5b2a0c3401c5972.mp4?origin=https://store.steampowered.com/'}
                 mp4={'https://clan.cloudflare.steamstatic.com/images//39049601/5631a3ae1ed0c086f12cbef7e134264d80a9d3d8.webm?origin=https://store.steampowered.com/'}
             />
-            <SteamDeckLarge games={gameData}/>
+            <SteamDeckLarge games={res.games}/>
 
             <div className={`${styles['page__description']} container`}>
                 <h1 className={styles['page__h1']}>STEAM DECK OLED</h1>
