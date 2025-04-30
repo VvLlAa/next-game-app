@@ -1,7 +1,7 @@
 export async function fetchGamesHome() {
     try {
         const res = await fetch(`http://localhost:3000/api/home`, {
-            next: { revalidate: 3600 },
+            next: { revalidate: 0 },
         });
 
         if (!res.ok) return null;
