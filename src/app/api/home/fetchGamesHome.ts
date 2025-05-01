@@ -4,7 +4,7 @@ export async function fetchGamesHome() {
     const baseUrl = getBaseUrl();
     try {
         const res = await fetch(`${baseUrl}/api/home`, {
-            next: { revalidate: 1200 },
+            next: { revalidate: 0 },
         });
 
         if (!res.ok) return null;
