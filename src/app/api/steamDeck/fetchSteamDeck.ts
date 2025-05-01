@@ -1,10 +1,7 @@
+import {getBaseUrl} from "@/src/utils/getBaseUrl";
+
 export async function fetchSteamDeck() {
-
-    const baseUrl =
-        process.env.NODE_ENV === 'development'
-            ? 'http://localhost:3000'
-            : process.env.BASE_URL;
-
+    const baseUrl = getBaseUrl();
     try {
         const res = await fetch(`${baseUrl}/api/steamDeck`, {
             next: { revalidate: 3600 },
