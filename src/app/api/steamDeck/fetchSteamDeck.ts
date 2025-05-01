@@ -1,6 +1,12 @@
 export async function fetchSteamDeck() {
+
+    const baseUrl =
+        process.env.NODE_ENV === 'development'
+            ? 'http://localhost:3000'
+            : process.env.BASE_URL;
+
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/steamDeck`, {
+        const res = await fetch(`${baseUrl}/api/steamDeck`, {
             next: { revalidate: 3600 },
         })
 
@@ -9,7 +15,6 @@ export async function fetchSteamDeck() {
         const data = await res.json();
 
         if (!data || !Array.isArray(data.games)) {
-            console.error('Invalid API response structure', data);
             return { games: [] };
         }
     } catch (error) {
