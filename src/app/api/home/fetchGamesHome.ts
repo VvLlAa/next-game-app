@@ -5,7 +5,7 @@ export async function fetchGamesHome() {
     const res = await fetch(
       `${process.env.KEY_GAME}/api/featuredcategories/?cc=us&l=english`,
       {
-        next: { revalidate: 0 },
+        next: { revalidate: 600 },
       }
     );
     const data = await res.json();
