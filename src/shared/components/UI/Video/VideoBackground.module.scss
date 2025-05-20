@@ -4,18 +4,18 @@
   z-index: 1;
   margin-bottom: 2rem;
 
-    &__video-pc {
-      width: auto;
-      height: auto;
-      max-width: 100vw;
-      max-height: 100vh;
-      display: block;
-      margin: 0 auto;
-    }
-    &__video-mobile{
-      display: none;
-      margin: 0 auto;
-    }
+  &__video-pc {
+    width: auto;
+    height: auto;
+    max-width: 100vw;
+    max-height: 100vh;
+    display: block;
+    margin: 0 auto;
+  }
+  &__video-mobile {
+    display: none;
+    margin: 0 auto;
+  }
 
   &__video-background {
     position: absolute;
@@ -27,7 +27,6 @@
     z-index: -1;
   }
 }
-
 
 @media screen and (max-width: 768px) {
   .fullscreen-video {

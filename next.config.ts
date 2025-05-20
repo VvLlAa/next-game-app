@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     domains: [
       'store.cloudflare.steamstatic.com',
       'shared.cloudflare.steamstatic.com',
-      'shared.akamai.steamstatic.com'
+      'shared.akamai.steamstatic.com',
     ],
   },
 };

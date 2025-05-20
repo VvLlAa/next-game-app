@@ -1,21 +1,34 @@
-import {getBaseUrl} from "@/src/utils/getBaseUrl";
-
 export async function fetchSteamDeck() {
-    const baseUrl = getBaseUrl();
-    try {
-        const res = await fetch(`${baseUrl}/api/steamDeck`, {
-            next: { revalidate: 3600 },
+  try {
+    const res = await fetch(
+      `${process.env.KEY_GAME}/api/featuredcategories?cc=us&l=en`,
+      {
+        next: { revalidate: 0 },
+      }
+    );
+    const data = await res.json();
+
+    const newReleases =
+      data.new_releases.items.map(
+        (item: { id: number; header_image: string; name: string }) => ({
+          id: item.id,
+          img: item.header_image,
+          name: item.name,
         })
+      ) || [];
 
-        if(!res.ok) return { games: [] }
+    const t =
+      data.specials.items.map(
+        (item: { id: number; header_image: string; name: string }) => ({
+          id: item.id,
+          img: item.header_image,
+          name: item.name,
+        })
+      ) || [];
 
-        const data = await res.json();
-
-        if (!data || !Array.isArray(data.games)) {
-            return { games: [] };
-        }
-    } catch (error) {
-        console.error(error);
-        return {games: []};
-    }
+    return [...newReleases, ...t];
+  } catch (error) {
+    console.error(error);
+    return  [];
+  }
 }

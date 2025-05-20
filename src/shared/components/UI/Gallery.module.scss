@@ -31,7 +31,7 @@
     z-index: 999;
   }
 
-  &__fullscreen-content{
+  &__fullscreen-content {
     position: relative;
     text-align: center;
     max-width: 90vw;
@@ -61,7 +61,7 @@
     font-size: 18px;
     border-radius: 4px;
     z-index: 10;
-    color:var(--text-color-gray);
+    color: var(--text-color-gray);
   }
 
   &__fullscreen-close {
@@ -127,7 +127,6 @@
   &__thumbnails-container {
     overflow-x: auto;
     display: flex;
-
   }
 
   &__scroll-btn {

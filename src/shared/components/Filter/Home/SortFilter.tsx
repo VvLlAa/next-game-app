@@ -11,10 +11,11 @@ import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '@/src/store';
 import { setSortOption } from '@/src/store/gamesSlice';
+import {SORT_OPTIONS} from "@/src/shared/constants/sort";
 
 const btns = [
-  { name: 'Популярные', image: likeGraySvg, imageActive: likeActive },
-  { name: 'Лидер продаж', image: cupSvg, imageActive: cupSvgActive },
+  { name: SORT_OPTIONS.POPULAR, image: likeGraySvg, imageActive: likeActive },
+  { name: SORT_OPTIONS.NEW, image: cupSvg, imageActive: cupSvgActive },
 ];
 
 export const SortFilter = () => {

@@ -5,24 +5,24 @@ import styles from './GameCard.module.scss';
 import { useDispatch } from 'react-redux';
 import { fetchGamesStartSpinner } from '@/src/store/gamesSlice';
 import Image from 'next/image';
-import {useRouter} from "next/navigation";
-import {useCallback} from "react";
+import { useRouter } from 'next/navigation';
+import { useCallback } from 'react';
 
 export const GameCard = ({ game }: { game: GameType }) => {
-    const router = useRouter();
+  const router = useRouter();
   const dispatch = useDispatch();
 
-    const openCard = useCallback(
-        (game: GameType) => {
-            dispatch(fetchGamesStartSpinner());
-            router.push(`/game/${game.id}`);
-        },
-        [dispatch, router]
-    );
+  const openCard = useCallback(
+    (game: GameType) => {
+      dispatch(fetchGamesStartSpinner());
+      router.push(`/game/${game.id}`);
+    },
+    [dispatch, router]
+  );
 
   return (
     <div className={styles['game-card']} onClick={() => openCard(game)}>
-     <div className={styles['game-card__image-wrapper']}>
+      <div className={styles['game-card__image-wrapper']}>
         <Image
           src={game.img}
           alt={`Обложка игры ${game.name}`}

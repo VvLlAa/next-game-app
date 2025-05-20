@@ -12,7 +12,7 @@ export const SpinnerHandler = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       dispatch(fetchGamesSuccessSpinner());
-    }, 100);
+    }, 300);
     return () => clearTimeout(timeout);
   }, [pathname, dispatch]);
 

@@ -8,11 +8,12 @@ import { GameType } from '@/src/type/type';
 import { fetchGamesStartSpinner } from '@/src/store/gamesSlice';
 import { AppState } from '@/src/store';
 import { BigCard } from '@/src/shared/components/GameCards/GameCard/BigCard/BigCard';
+import {SORT_OPTIONS} from "@/src/shared/constants/sort";
 
 interface GameCardFullWidthProps {
   initialGames: {
-    popularNewProducts: GameType[];
-    bestsellerProducts: GameType[];
+    popularNewProducts: GameType[] | null;
+    bestsellerProducts: GameType[] | null;
   };
 }
 
@@ -32,10 +33,10 @@ export const GameCardLarge = ({ initialGames }: GameCardFullWidthProps) => {
   );
 
   useEffect(() => {
-    if ('Популярные' === sortOption) {
-      setGames(initialGames.popularNewProducts);
-    } else if ('Лидер продаж' === sortOption) {
-      setGames(initialGames.bestsellerProducts);
+    if (SORT_OPTIONS.POPULAR === sortOption) {
+      setGames(initialGames.popularNewProducts || []);
+    } else if (SORT_OPTIONS.NEW === sortOption) {
+      setGames(initialGames.bestsellerProducts || []);
     }
   }, [sortOption, initialGames]);
 
