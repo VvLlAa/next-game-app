@@ -22,8 +22,6 @@ export const GameCardLarge = ({ initialGames }: GameCardFullWidthProps) => {
   const router = useRouter();
   const sortOption = useSelector((state: AppState) => state.games.sortOption);
 
-  const [games, setGames] = useState<GameType[]>([]);
-
   const handleCardClick = useCallback(
     (game: GameType) => {
       dispatch(fetchGamesStartSpinner());
@@ -32,13 +30,9 @@ export const GameCardLarge = ({ initialGames }: GameCardFullWidthProps) => {
     [dispatch, router]
   );
 
-  useEffect(() => {
-    if (SORT_OPTIONS.POPULAR === sortOption) {
-      setGames(initialGames.popularNewProducts || []);
-    } else if (SORT_OPTIONS.NEW === sortOption) {
-      setGames(initialGames.bestsellerProducts || []);
-    }
-  }, [sortOption, initialGames]);
+  const games = SORT_OPTIONS.POPULAR === sortOption
+      ? initialGames.popularNewProducts || []
+      : initialGames.bestsellerProducts || [];
 
   return (
     <div className={styles['game-card']}>
