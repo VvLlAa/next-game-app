@@ -24,7 +24,8 @@ export const VideoBackground = () => {
         autoPlay
         loop
         muted
-        preload="none"
+        playsInline
+        preload="auto"
         className={styles['fullscreen-video__video-mobile']}
       >
         <source
