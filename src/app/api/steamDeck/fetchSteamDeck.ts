@@ -6,29 +6,27 @@ export async function fetchSteamDeck() {
         next: { revalidate: 0 },
       }
     );
+
+    if(!res) return null;
+
     const data = await res.json();
 
-    const newReleases =
-      data.new_releases.items.map(
-        (item: { id: number; header_image: string; name: string }) => ({
-          id: item.id,
-          img: item.header_image,
-          name: item.name,
-        })
-      ) || [];
+    const newReleases = (data.new_releases?.items ?? []).map(transformApiItem);
+    const specials = (data.specials?.items ?? []).map(transformApiItem);
 
-    const t =
-      data.specials.items.map(
-        (item: { id: number; header_image: string; name: string }) => ({
-          id: item.id,
-          img: item.header_image,
-          name: item.name,
-        })
-      ) || [];
-
-    return [...newReleases, ...t];
+    return [...newReleases, ...specials];
   } catch (error) {
     console.error(error);
     return  [];
   }
 }
+
+
+function transformApiItem(item : { id: number; header_image: string; name: string }) {
+    return {
+        id: item.id,
+        img: item.header_image,
+        name: item.name,
+    }
+}
+

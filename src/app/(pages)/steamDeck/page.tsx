@@ -7,7 +7,7 @@ export const revalidate = 0;
 
 export default async function steamDeck() {
   const res = await fetchSteamDeck();
-  console.log(res);
+
   const gameData = res ?? [];
 
   if (!gameData) return null;
